@@ -15,7 +15,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -27,6 +26,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Setup Email credential for receving mail messages
+EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+EMAIL_HOST = 'smpt.gmail.com'
+EMAIL_HOST_USER = 'ppilipovic84@gmail.com'
+EMAIL_HOST_PASSWORD = 'gnomeregan84go'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 # Application definition
 
