@@ -24,7 +24,7 @@ def contact(request):
             subject = 'Site contact form'
             from_email = settings.EMAIL_HOST_USER
             to_email = [from_email, 'ppilipovic84@gmail.com']
-            contact_message = "%s: %s%s via %s" % (
+            contact_message = "%s: %s''%s 'Tekst poruke: ' %s" % (
                 form_name,
                 form_email,
                 form_topic,
