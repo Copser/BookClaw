@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'main',
     'django.contrib.flatpages',
     'contact',
+    'portfolio',
 )
 
 MIDDLEWARE_CLASSES = (
