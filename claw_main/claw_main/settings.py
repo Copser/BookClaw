@@ -29,8 +29,8 @@ ALLOWED_HOSTS = []
 # Setup Email credential for receving mail messages
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'testcopser@gmail.com'
-EMAIL_HOST_PASSWORD = 'Test84Applications'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
@@ -89,8 +89,12 @@ WSGI_APPLICATION = 'claw_main.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'bookclaw.db'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'POST': '',
     }
 }
 
@@ -100,7 +104,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Belgrade'
+TIME_ZONE = 'Europe/Zagreb'
 
 USE_I18N = True
 
@@ -112,6 +116,24 @@ SITE_ID = 1
 
 # Crispy forms configuration
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# Heroku Configuration
+# Extending settings.py to loacal_settings.py
+ALLOWED_HOSTS = ["*"]
+
+# Parse database configuration from $DATABASES_URL
+import dj_database_url
+
+DATABASES = {'default': dj_database_url.config()}
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# try load local_settings.py if it exists
+try:
+    from .local_settings import *
+except Exception, e:
+    pass
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
