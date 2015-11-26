@@ -143,10 +143,7 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
-<<<<<<< HEAD
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-=======
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 # Configuration S3 Amazon Web Service for static serving
 # Storage on S3 settings are stored as os.environs to keep settings.py clean
@@ -157,4 +154,3 @@ if not DEBUG:
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
     STATIC_URL = S3_URL
->>>>>>> deploy_branch
