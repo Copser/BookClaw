@@ -156,19 +156,3 @@ if not DEBUG:
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
     STATIC_URL = S3_URL
-
-import boto
-from boto.s3.key import Key
-import boto.s3.connection
-
-
-AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
-AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-
-conn = boto.s3.connect_to_region('us-west-2',
-                                 aws_access_key_id=AWS_ACCESS_KEY_ID,
-                                 aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-                                 calling_format=boto.s3.connection.OrdinaryCallingFormat(),
-                                 )
-bucket = conn.get_bucket(AWS_STORAGE_BUCKET_NAME)
