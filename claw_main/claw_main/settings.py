@@ -147,7 +147,6 @@ STATIC_URL = '/static/'
 
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-<<<<<<< HEAD
 # Configuration S3 Amazon Web Service for static serving
 # Storage on S3 settings are stored as os.environs to keep settings.py clean
 # if not DEBUG:
@@ -157,7 +156,7 @@ STATIC_URL = '/static/'
 #     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 #     S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 #     STATIC_URL = S3_URL
-=======
+
 # Memcachier configuration
 os.environ["MEMCACHE_SERVERS"] = os.environ.get("MEMECACHE_SERVERS", '').\
     replace(',', ';')
@@ -196,4 +195,3 @@ CACHES = {
         }
     }
 }
->>>>>>> deploy_branch
