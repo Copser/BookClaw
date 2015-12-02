@@ -29,8 +29,8 @@ ALLOWED_HOSTS = []
 # Setup Email credential for receving mail messages
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'testcopser@gmail.com'
+EMAIL_HOST_PASSWORD = 'Test84Applications'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
@@ -145,12 +145,41 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-# Configuration S3 Amazon Web Service for static serving
-# Storage on S3 settings are stored as os.environs to keep settings.py clean
-if not DEBUG:
-    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
-    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-    STATIC_URL = S3_URL
+# Memcachier configuration
+os.environ["MEMCACHE_SERVERS"] = os.environ.get("MEMECACHE_SERVERS", '').\
+    replace(',', ';')
+os.environ["MEMCACHE_USERNAME"] = os.environ.get("MEMECACHE_USERNAME", '')
+os.environ["MEMCACHE_PASSWORD"] = os.environ.get("MEMECACHE_PASSWORD", '')
+
+CACHES = {
+    'default': {
+        # Use pylibmc
+        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+
+        # Use binary memcache protocol (needed for authentication)
+        'BINARY': True,
+
+        'TIMEOUT': None,
+
+        'OPTIONS': {
+            # Enable faster IO
+            'no_block': True,
+            'tcp_nodelay': True,
+
+            # Keep connection alive
+            'tcp_keeplive': True,
+
+            # Timeout for set/get requests
+            '_poll_timeout': 2000,
+
+            # Use consistent hashing for failover
+            'ketama': True,
+
+            # Configure failover timings
+            'connect_timeout': 2000,
+            'remove_failed': 4,
+            'retry_timeout': 2,
+            'dead_timeout': 10
+        }
+    }
+}
