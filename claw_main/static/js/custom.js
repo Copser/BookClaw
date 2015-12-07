@@ -18,57 +18,45 @@ $(document).ready(function(){
             window.scrollReveal = new scrollReveal();
 
 
-    /*==========================================
-    WRITE  YOUR  SCRIPTS BELOW
-    =====================================================*/
+});
+
+/* A key/value dictionary for texts to be displayed.
+ * The keys are paired with each image's alt attribute. 
+ */
+var texts = {
+  "default_title" : "Default title",
+  "default_description" : "Default description",
+  "item1_title" : "Item 1 title",
+  "item1_description" : "Item 1 description",
+  "item2_title" : "Item 2 title",
+  "item2_description" : "Item 2 description",
+  "item3_title" : "Item 3 title",
+  "item3_description" : "Item 3 description",
+  "item4_title" : "Item 4 title",
+  "item4_description" : "Item 4 description",
+  "item5_title" : "Item 5 title",
+  "item5_description" : "Item 5 description",
+  "item6_title" : "Item 6 title",
+  "item6_description" : "Item 6 description",
+  "item7_title" : "Item 7 title",
+  "item7_description" : "Item 7 description",
+  "item8_title" : "Item 8 title",
+  "item8_description" : "Item 8 description",
+}
 
 
-        // //Center the "info" bubble in the  "circle" div
-        // var divTop = ($("#divCircle").height() - $("#middleBubble").height())/2;
-        // var divLeft = ($("#divCircle").width() - $("#middleBubble").width())/2;
-        // $("#middleBubble").css("top",divTop + "px");
-        // $("#middleBubble").css("left",divLeft + "px");
-
-
-
-        //Arrange the icons in a circle centered in the div
-        numItems = $( "#divCircle img" ).length; //How many items are in the circle?
-        start = 0.55; //the angle to put the first image at. a number between 0 and 2pi
-        step = (2*Math.PI)/numItems; //calculate the amount of space to put between the items.
-
-        //Now loop through the buttons and position them in a circle
-        $( "#divCircle img" ).each(function( index ) {
-            radius = ($("#divCircle").width() - $(this).width())/2; //The radius is the distance from the center of the div to the middle of an icon
-            //the following lines are a standard formula for calculating points on a circle. x = cx + r * cos(a); y = cy + r * sin(a)
-            //have made adjustments because the center of the circle is not at (0,0), but rather the top/left coordinates for the center of the div
-            //also adjust for the fact that we need to know the coordinates for the top-left corner of the image, not for the center of the image.
-            tmpTop = (($("#divCircle").height()/2) + radius * Math.sin(start)) - ($(this).height()/2);
-            tmpLeft = (($("#divCircle").width()/2) + radius * Math.cos(start)) - ($(this).width()/2);
-            start += step; //add the "step" number of radians to jump to the next icon
-
-            //set the top/left settings for the image
-            $(this).css("top",tmpTop);
-            $(this).css("left",tmpLeft);
-
-        });
-
-        //set the highlight and bubble default based on the homepageGridDefault class
-        currentGridSelector = $(".homepageGridDefault").attr("id");
-        $("#" + currentGridSelector).attr("src", "static/img/circle/home-" + currentGridSelector + "-icon-on.png");
-        $("#middleBubble").html("<p><b>" + $(".homepageGridDefault").data("bubble1") + "</b><br />" + $(".homepageGridDefault").data("bubble2") + "</p>");
-
-        //Setup the grid to change the highlighted bubble on mouseover ans click
-        $("#divCircle img").hover(function(){
-            //if the selected option has changed, deactivate the current selection
-            if(currentGridSelector != $(this).attr("id"))
-            {
-                $("#" + currentGridSelector).attr("src", "static/img/circle/home-" + currentGridSelector + "-icon-off.png");
-            }
-            //turn on the new selection
-            $(this).attr("src", "static/img/circle/home-" + $(this).attr("id") + "-icon-on.png");
-            //set the content of the center bubble
-            $("#middleBubble").html("<p><b>" + $(this).data("bubble1") + "</b><br />" + $(this).data("bubble2") + "</p>");
-            currentGridSelector = $(this).attr("id");
-
-        });
+$(document).ready(function(){
+  
+  /* If you don't want the texts to revert back to its original state, simply remove the mouseleave part */
+  $('body').on({ 
+    mouseenter : function(event){
+      var item_alt = $(event.target).attr("alt");
+      $("#item_title").html(texts[item_alt+"_title"]);
+      $("#item_description").html(texts[item_alt+"_description"]);
+    }, 
+      mouseleave : function(event){
+      $("#item_title").html(texts["default_title"]);
+      $("#item_description").html(texts["default_description"]);
+    }
+  }, ".moon");
 });
