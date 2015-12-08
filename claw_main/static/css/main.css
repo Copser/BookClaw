@@ -13,7 +13,16 @@
     top: 50%;
     transform: translate(-50%, -50%);
     position: absolute;
+}
+
+.central_text{
+    width:50%;
+    height:50%;
     background: url(../img/circle/new11.png);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .moon_container{
